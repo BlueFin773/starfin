@@ -9,12 +9,18 @@ class _WelcomePageState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Welcome to StarFin!'),
+      body: Container(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          children:[
+            Text("Welcome to StarFin!"),
+            Text("StarFin helps you create a custom day plan to visit tourist attractions in the Toronto area based on your preferences."),
+            Image.asset('assets/images/map.png'),
+          ],
+        ),
       ),
-      body: Center(
-        child: Text("Welcome page text"),
-      ),
+
+
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
       ),
