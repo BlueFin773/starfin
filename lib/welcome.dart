@@ -14,7 +14,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           children:[
             Text("Welcome to StarFin!"),
-            Text("StarFin helps you create a custom day plan to visit tourist attractions in the Toronto area based on your preferences."),
+            Text("StarFin helps you create a custom day plan to visit tourist attractions in the Toronto area based on your preference."),
             Image.asset('assets/images/map.png'),
           ],
         ),
