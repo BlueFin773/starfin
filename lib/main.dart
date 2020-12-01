@@ -15,7 +15,16 @@ class Starfin extends StatelessWidget {
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
         accentColor: Color(0xFF6C63FF),
-        textTheme: TextTheme(bodyText2:TextStyle(color: Color(0xFF59606D))),
+        textTheme: TextTheme(bodyText2:TextStyle(color: Color(0xFF59606D,))),
+
+
+        buttonTheme: ButtonThemeData(
+          minWidth: 200.0,
+          height: 75.0,
+          buttonColor: Color(0xFF6C63FF),
+          textTheme: ButtonTextTheme.primary,
+
+        ),
         fontFamily: 'Overpass_Mono',
       ),
       home: WelcomePage(),

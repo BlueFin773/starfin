@@ -14,14 +14,14 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           children:[
             SizedBox(
-              height: 40,
+              height: 50,
             ),
             Text("Welcome to StarFin!",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36, ),
               textAlign: TextAlign.center
             ),
             SizedBox(
-              height: 50,
+              height: 60,
             ),
             Text("StarFin helps you create a custom day plan to visit tourist attractions in the Toronto area based on your preferences.",
                 style: TextStyle(fontSize:18),
@@ -31,6 +31,13 @@ class _WelcomePageState extends State<WelcomePage> {
               height: 80,
             ),
             Image.asset('assets/images/map.png'),
+            SizedBox(
+              height: 100,
+            ),
+            RaisedButton(
+              onPressed: () {},
+              child: Text("Let's Go!", style: TextStyle(fontSize: 18.0)),
+             )
           ],
         ),
       ),
