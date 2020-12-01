@@ -14,23 +14,23 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           children:[
             SizedBox(
-              height: 50,
+              height: 20,
             ),
             Text("Welcome to StarFin!",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36, ),
               textAlign: TextAlign.center
             ),
             SizedBox(
-              height: 60,
+              height: 40,
             ),
             Text("StarFin helps you create a custom day plan to visit tourist attractions in the Toronto area based on your preferences.",
                 style: TextStyle(fontSize:18),
                 textAlign: TextAlign.center
             ),
             SizedBox(
-              height: 80,
+              height: 60,
             ),
-            Image.asset('assets/images/map.png'),
+            Image.asset('assets/images/map2.png'),
             SizedBox(
               height: 100,
             ),
@@ -40,11 +40,6 @@ class _WelcomePageState extends State<WelcomePage> {
              )
           ],
         ),
-      ),
-
-
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
       ),
     );
     throw UnimplementedError();
