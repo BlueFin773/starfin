@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'welcome.dart';
+import 'rate.dart';
 
 void main() => runApp(Starfin());
 
@@ -27,7 +28,7 @@ class Starfin extends StatelessWidget {
         ),
         fontFamily: 'Overpass_Mono',
       ),
-      home: WelcomePage(),
+      home: RatePage(),
     );
   }
 }
