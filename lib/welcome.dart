@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'rate.dart';
 
 class WelcomePage extends StatefulWidget {
   @override
@@ -32,10 +33,15 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             Image.asset('assets/images/map2.png'),
             SizedBox(
-              height: 100,
+              height: 80,
             ),
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RatePage()),
+                );
+              },
               child: Text("Let's Go!", style: TextStyle(fontSize: 18.0)),
              )
           ],
