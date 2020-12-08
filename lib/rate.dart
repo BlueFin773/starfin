@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'match.dart';
 
 class RatePage extends StatefulWidget {
   @override
@@ -153,7 +154,12 @@ class _RatePageState extends State<RatePage> {
 
 
             RaisedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MatchPage()),
+                );
+              },
               child: Text("RATE IT!", style: TextStyle(fontSize: 18.0)),
             )
           ],
