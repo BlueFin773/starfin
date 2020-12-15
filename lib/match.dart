@@ -24,6 +24,24 @@ class _MatchPageState extends State<MatchPage> {
                 new Expanded(
                   child: ListView(
                     children: [
+                      new GestureDetector(
+                        onTap: (){
+                          debugPrint("card clicked");
+
+                         },
+                        child: new Card(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              const ListTile(
+                                leading: Icon(Icons.album),
+                                title: Text('The Enchanted Nightingale'),
+                                subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                              ),
+                            ],
+                          ),
+                        ),
+                  ),
                       Card(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
