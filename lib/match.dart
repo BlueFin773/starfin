@@ -8,6 +8,17 @@ class MatchPage extends StatefulWidget {
 }
 
 class _MatchPageState extends State<MatchPage> {
+  bool card1Status = false;
+  bool card2Status = false;
+  bool card3Status = false;
+  bool card4Status = false;
+  bool card5Status = false;
+  bool card6Status = false;
+  bool card7Status = false;
+  bool card8Status = false;
+  bool card9Status = false;
+  bool card10Status = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,32 +35,26 @@ class _MatchPageState extends State<MatchPage> {
                 new Expanded(
                   child: ListView(
                     children: [
-                      new GestureDetector(
-                        onTap: (){
-                          debugPrint("card clicked");
-
-                         },
-                        child: new Card(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: <Widget>[
-                              const ListTile(
-                                leading: Icon(Icons.album),
-                                title: Text('The Enchanted Nightingale'),
-                                subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                              ),
-                            ],
-                          ),
-                        ),
-                  ),
                       Card(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            const ListTile(
+                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text('The Enchanted Nightingale'),
                               subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                              enabled: true,
+                              selected: card1Status,
+                              selectedTileColor: Colors.red,
+                              onTap: () {
+                                setState(() {
+                                  if(card1Status == false){
+                                    card1Status = true;
+                                  }else
+                                  card1Status = false;
+                                });
+                                debugPrint("card clicked");
+                              },
                             ),
                           ],
                         ),
@@ -58,10 +63,21 @@ class _MatchPageState extends State<MatchPage> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: <Widget>[
-                            const ListTile(
+                             ListTile(
                               leading: Icon(Icons.album),
                               title: Text('The Enchanted Nightingale'),
                               subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
+                              selected: card2Status,
+                              selectedTileColor: Colors.red,
+                              onTap: () {
+                                setState(() {
+                                  if(card2Status == false){
+                                    card2Status = true;
+                                  }else
+                                    card2Status = false;
+                                });
+                                debugPrint("card clicked");
+                              },
                             ),
                           ],
                         ),
