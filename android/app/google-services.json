@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "368865109928",
+    "project_id": "starfin-5a4fd",
+    "storage_bucket": "starfin-5a4fd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368865109928:android:7265ac10ccec7468205f9d",
+        "android_client_info": {
+          "package_name": "com.matthewlitvinov.starfin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368865109928-mqbvbjk9ovkgv9gltdn2lr7eln9v7c0d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFoWtFvZq9ylffN9poZGufnWxPn0UOtB0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368865109928-mqbvbjk9ovkgv9gltdn2lr7eln9v7c0d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
