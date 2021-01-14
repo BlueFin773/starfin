@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 //TODO: Make list items selectable
 
@@ -18,6 +19,16 @@ class _MatchPageState extends State<MatchPage> {
   bool card8Status = false;
   bool card9Status = false;
   bool card10Status = false;
+
+  final _firestore = FirebaseFirestore.instance;
+  //TODO: get this working
+  // get data from firestore database
+  void getLocations() async {
+    //final locations = await _firestore.collection('locations').getDocuments();
+    //for (var location in locations.docs){
+     // print(location.data);
+   // }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -140,10 +151,11 @@ class _MatchPageState extends State<MatchPage> {
 
                 RaisedButton(
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => MatchPage()),
-                    );
+                    getLocations();
+                    //Navigator.push(
+                      //context,
+                      //MaterialPageRoute(builder: (context) => MatchPage()),
+                    //);
                   },
                   child: Text("MAP IT!", style: TextStyle(fontSize: 18.0)),
                 )

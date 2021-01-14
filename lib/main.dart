@@ -6,8 +6,13 @@ import 'package:flutter/material.dart';
 import 'welcome.dart';
 import 'rate.dart';
 import 'match.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(Starfin());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(Starfin());
+}
 
 class Starfin extends StatelessWidget {
   @override

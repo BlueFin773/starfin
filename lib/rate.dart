@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'match.dart';
 
+
 class RatePage extends StatefulWidget {
   @override
   _RatePageState createState() => _RatePageState();
