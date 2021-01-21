@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 //TODO: Make list items selectable
 
@@ -20,19 +21,34 @@ class _MatchPageState extends State<MatchPage> {
   bool card9Status = false;
   bool card10Status = false;
 
-  final _firestore = FirebaseFirestore.instance;
+
   //TODO: get this working
   // get data from firestore database
-  void getLocations() async {
-    //final locations = await _firestore.collection('locations').getDocuments();
-    //for (var location in locations.docs){
-     // print(location.data);
-   // }
+  void getLocations(){
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    CollectionReference locations = FirebaseFirestore.instance.collection('locations');
+    return FutureBuilder<DocumentSnapshot>(
+      future: locations.doc('dMF0VaYNbC3z3slY43xp').get(),
+      builder:
+      (BuildContext context , AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.hasError){
+          return Text("Something went wrong");
+        }
+
+        if(snapshot.connectionState == ConnectionState.done) {
+          Map<String, dynamic> data = snapshot.data.data();
+          return Text("Data: ${data['name']} ${data['description']}");
+        }
+        return Text("loading");
+      },
+    );
+
+
+    /*return Scaffold(
         body: Container(
           padding: const EdgeInsets.all(32),
           child: Column(
@@ -162,6 +178,6 @@ class _MatchPageState extends State<MatchPage> {
               ],
           ),
         ),
-    );
+    );*/
   }
 }
