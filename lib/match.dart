@@ -21,31 +21,47 @@ class _MatchPageState extends State<MatchPage> {
   bool card9Status = false;
   bool card10Status = false;
 
+  //TODO: need to make card selection unique, all are set to card1status. Look in to listbuilder.
+  getLocationItems(AsyncSnapshot<QuerySnapshot> snapshot){
+    return snapshot.data.docs
+        .map((doc) => new ListTile (
+            leading: Icon(Icons.album),
+            title: new Text(doc["name"]),
+            subtitle: new Text(doc["description"]),
+            enabled: true,
+            selected: card1Status,
+            selectedTileColor: Colors.red,
+            onTap: () {
+              setState(() {
+                if(card1Status == false){
+                  card1Status = true;
+                }else
+                  card1Status = false;
+              });
+              debugPrint("card clicked");
+            },
 
-  //TODO: get this working
-  // get data from firestore database
-  void getLocations(){
-
+      )
+    )
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
     CollectionReference locations = FirebaseFirestore.instance.collection('locations');
-    return FutureBuilder<DocumentSnapshot>(
-      future: locations.doc('dMF0VaYNbC3z3slY43xp').get(),
-      builder:
-      (BuildContext context , AsyncSnapshot<DocumentSnapshot> snapshot) {
-        if (snapshot.hasError){
-          return Text("Something went wrong");
-        }
 
-        if(snapshot.connectionState == ConnectionState.done) {
-          Map<String, dynamic> data = snapshot.data.data();
-          return Text("Data: ${data['name']} ${data['description']}");
-        }
-        return Text("loading");
-      },
-    );
+    return StreamBuilder<QuerySnapshot>(
+      stream: locations.snapshots(),
+      builder: (BuildContext context , AsyncSnapshot<QuerySnapshot> snapshot){
+        if (!snapshot.hasData) return new Text("There is no expense");
+        //return new ListView(children: getLocationItems(snapshot));
+        return new Card(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: getLocationItems(snapshot)
+          )
+        );
+    });
 
 
     /*return Scaffold(
