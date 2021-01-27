@@ -53,147 +53,40 @@ class _MatchPageState extends State<MatchPage> {
     return StreamBuilder<QuerySnapshot>(
       stream: locations.snapshots(),
       builder: (BuildContext context , AsyncSnapshot<QuerySnapshot> snapshot){
-        if (!snapshot.hasData) return new Text("There is no expense");
+        if (!snapshot.hasData) return new Text("There is no data");
         //return new ListView(children: getLocationItems(snapshot));
-        return new Card(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: getLocationItems(snapshot)
+        return Scaffold(
+          body:Container(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text("Your Matches!",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36,),
+                      textAlign: TextAlign.center
+                  ),
+                  new Expanded(
+                    child: ListView(
+                      children: getLocationItems(snapshot)
+                    )
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      //getLocations();
+                      //Navigator.push(
+                      //context,
+                      //MaterialPageRoute(builder: (context) => MatchPage()),
+                      //);
+                    },
+                    child: Text("MAP IT!", style: TextStyle(fontSize: 18.0)),
+                  )
+                ]
+            )
           )
         );
     });
-
-
-    /*return Scaffold(
-        body: Container(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            //crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text("Your Matches!",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36,),
-                    textAlign: TextAlign.center
-                ),
-
-                new Expanded(
-                  child: ListView(
-                    children: [
-                      Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                             ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text('The Enchanted Nightingale'),
-                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                              enabled: true,
-                              selected: card1Status,
-                              selectedTileColor: Colors.red,
-                              onTap: () {
-                                setState(() {
-                                  if(card1Status == false){
-                                    card1Status = true;
-                                  }else
-                                  card1Status = false;
-                                });
-                                debugPrint("card clicked");
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                             ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text('The Enchanted Nightingale'),
-                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                              selected: card2Status,
-                              selectedTileColor: Colors.red,
-                              onTap: () {
-                                setState(() {
-                                  if(card2Status == false){
-                                    card2Status = true;
-                                  }else
-                                    card2Status = false;
-                                });
-                                debugPrint("card clicked");
-                              },
-                            ),
-                          ],
-                        ),
-                      ),
-                      Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text('The Enchanted Nightingale'),
-                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text('The Enchanted Nightingale'),
-                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text('The Enchanted Nightingale'),
-                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                            ),
-                          ],
-                        ),
-                      ),
-                      Card(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            const ListTile(
-                              leading: Icon(Icons.album),
-                              title: Text('The Enchanted Nightingale'),
-                              subtitle: Text('Music by Julie Gable. Lyrics by Sidney Stein.'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(
-                  height: 20,
-                ),
-
-                RaisedButton(
-                  onPressed: () {
-                    getLocations();
-                    //Navigator.push(
-                      //context,
-                      //MaterialPageRoute(builder: (context) => MatchPage()),
-                    //);
-                  },
-                  child: Text("MAP IT!", style: TextStyle(fontSize: 18.0)),
-                )
-              ],
-          ),
-        ),
-    );*/
   }
 }
