@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:starfin/model/location.dart';
+import 'package:starfin/utils/store.dart';
+
 
 //TODO: Make list items selectable
 
@@ -10,19 +13,74 @@ class MatchPage extends StatefulWidget {
 }
 
 class _MatchPageState extends State<MatchPage> {
-  bool card1Status = false;
-  bool card2Status = false;
-  bool card3Status = false;
-  bool card4Status = false;
-  bool card5Status = false;
-  bool card6Status = false;
-  bool card7Status = false;
-  bool card8Status = false;
-  bool card9Status = false;
-  bool card10Status = false;
+  List<Location> locations = getLocations();
+  List<String> userSelected = getSelectedIDs();
 
-  //TODO: need to make card selection unique, all are set to card1status. Look in to listbuilder.
-  getLocationItems(AsyncSnapshot<QuerySnapshot> snapshot){
+  void _handleSelectedListChanged(String locationID){
+    setState(() {
+      if(userSelected.contains(locationID)){
+        userSelected.remove(locationID);
+      }else {
+        userSelected.add(locationID);
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Column _buildLocations(List<Location> locationsList) {
+      return Column(
+          children: <Widget>[
+            Expanded(
+                child: ListView.builder(
+                    itemCount: locationsList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(locationsList[index].name),
+                      );
+                    }
+                )
+            )
+          ]
+      );
+    }
+
+
+      const double _iconSize = 20.0;
+      return DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(50.0),
+              child: AppBar(
+                backgroundColor: Colors.white,
+                elevation: 2.0,
+                bottom: TabBar(
+                  labelColor: Theme.of(context).indicatorColor,
+                  tabs:[
+                    Tab(icon: Icon(Icons.restaurant, size: _iconSize)),
+                    Tab(icon: Icon(Icons.favorite, size: _iconSize)),
+                  ],
+                )
+              )
+            ),
+              body: Padding(
+              padding: EdgeInsets.all(5.0),
+              child: TabBarView(
+                children:[
+                  _buildLocations(locations.toList()),
+                  _buildLocations(locations.where((location) => userSelected.contains(location.id)).toList()),
+                ]
+              )
+          )
+
+          ));
+    }
+  }
+
+
+
+  /*getLocationItems(AsyncSnapshot<QuerySnapshot> snapshot){
     return snapshot.data.docs
         .map((doc) => new ListTile (
             leading: Icon(Icons.album),
@@ -66,8 +124,12 @@ class _MatchPageState extends State<MatchPage> {
                       textAlign: TextAlign.center
                   ),
                   new Expanded(
-                    child: ListView(
-                      children: getLocationItems(snapshot)
+                    child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return getLocationItems(snapshot);
+                      } ,
+                      //children: getLocationItems(snapshot)
                     )
                   ),
                   SizedBox(
@@ -89,4 +151,4 @@ class _MatchPageState extends State<MatchPage> {
         );
     });
   }
-}
+}*/
