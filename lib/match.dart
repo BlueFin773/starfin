@@ -16,6 +16,8 @@ class _MatchPageState extends State<MatchPage> {
   List<Location> locations = getLocations();
   List<String> userSelected = getSelectedIDs();
 
+
+
   void _handleSelectedListChanged(String locationID){
     setState(() {
       if(userSelected.contains(locationID)){
@@ -37,6 +39,17 @@ class _MatchPageState extends State<MatchPage> {
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                         title: Text(locationsList[index].name),
+                        leading: Image.network(locationsList[index].imageURL),
+                        subtitle: Text(locations[index].description),
+                        enabled: true,
+                        selected: locations[index].selected,
+                        selectedTileColor: Colors.red,
+                        onTap:() {
+                          setState(() {
+                            locations[index].selected= !locations[index].selected;
+                          });
+                        }
+
                       );
                     }
                 )

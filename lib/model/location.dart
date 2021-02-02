@@ -5,9 +5,9 @@ class Location {
   final String description;
   final String address;
   final String imageURL;
-  final bool selected;
+   bool selected;
 
-  const Location({
+   Location({
     this.id,
     this.name,
     this.description,
