@@ -53,8 +53,6 @@ List<Location> getLocations() {
 
   List<String> getSelectedIDs(){
     return [
-      '0',
-      '2',
-      '3',
+
     ];
   }

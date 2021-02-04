@@ -4,9 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:starfin/model/location.dart';
 import 'package:starfin/utils/store.dart';
 
-
-//TODO: Make list items selectable
-
 class MatchPage extends StatefulWidget {
   @override
   _MatchPageState createState() => _MatchPageState();
@@ -15,8 +12,6 @@ class MatchPage extends StatefulWidget {
 class _MatchPageState extends State<MatchPage> {
   List<Location> locations = getLocations();
   List<String> userSelected = getSelectedIDs();
-
-
 
   void _handleSelectedListChanged(String locationID){
     setState(() {
@@ -43,10 +38,11 @@ class _MatchPageState extends State<MatchPage> {
                         subtitle: Text(locations[index].description),
                         enabled: true,
                         selected: locations[index].selected,
-                        selectedTileColor: Colors.red,
+                        selectedTileColor: Color(0xFF6C63FF),
                         onTap:() {
                           setState(() {
-                            locations[index].selected= !locations[index].selected;
+                            locations[index].selected = !locations[index].selected;
+                            _handleSelectedListChanged(locations[index].id);
                           });
                         }
 
