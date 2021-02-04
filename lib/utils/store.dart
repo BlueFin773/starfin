@@ -46,7 +46,34 @@ List<Location> getLocations() {
       imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
       selected: false,
 
-    )
+    ),
+    Location(
+      id: '5',
+      name: 'name5',
+      description: 'description5',
+      address: 'address5',
+      imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
+      selected: false,
+
+    ),
+    Location(
+      id: '6',
+      name: 'name6',
+      description: 'description6',
+      address: 'address6',
+      imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
+      selected: false,
+
+    ),
+    Location(
+      id: '7',
+      name: 'name7',
+      description: 'description7',
+      address: 'address7',
+      imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
+      selected: false,
+
+    ),
 
   ];
 }

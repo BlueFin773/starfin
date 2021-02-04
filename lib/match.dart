@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:starfin/model/location.dart';
 import 'package:starfin/utils/store.dart';
+import 'package:starfin/map.dart';
 
 class MatchPage extends StatefulWidget {
   @override
@@ -13,11 +16,11 @@ class _MatchPageState extends State<MatchPage> {
   List<Location> locations = getLocations();
   List<String> userSelected = getSelectedIDs();
 
-  void _handleSelectedListChanged(String locationID){
+  void _handleSelectedListChanged(String locationID) {
     setState(() {
-      if(userSelected.contains(locationID)){
+      if (userSelected.contains(locationID)) {
         userSelected.remove(locationID);
-      }else {
+      } else {
         userSelected.add(locationID);
       }
     });
@@ -33,18 +36,19 @@ class _MatchPageState extends State<MatchPage> {
                     itemCount: locationsList.length,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                        title: Text(locationsList[index].name),
-                        leading: Image.network(locationsList[index].imageURL),
-                        subtitle: Text(locations[index].description),
-                        enabled: true,
-                        selected: locations[index].selected,
-                        selectedTileColor: Color(0xFF6C63FF),
-                        onTap:() {
-                          setState(() {
-                            locations[index].selected = !locations[index].selected;
-                            _handleSelectedListChanged(locations[index].id);
-                          });
-                        }
+                          title: Text(locationsList[index].name),
+                          leading: Image.network(locationsList[index].imageURL),
+                          subtitle: Text(locations[index].description),
+                          enabled: true,
+                          selected: locations[index].selected,
+                          selectedTileColor: Color(0xFF6C63FF),
+                          onTap: () {
+                            setState(() {
+                              locations[index].selected =
+                              !locations[index].selected;
+                              _handleSelectedListChanged(locations[index].id);
+                            });
+                          }
 
                       );
                     }
@@ -55,11 +59,45 @@ class _MatchPageState extends State<MatchPage> {
     }
 
 
-      const double _iconSize = 20.0;
-      return DefaultTabController(
-          length: 2,
-          child: Scaffold(
-            appBar: PreferredSize(
+    //const double _iconSize = 20.0;
+    return Scaffold(
+        body:Container(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text("Your Matches!",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36,),
+                      textAlign: TextAlign.center
+                  ),
+                  new Expanded(
+                        child: _buildLocations(locations.toList()),
+                      ),
+
+                  SizedBox(
+                    height: 20,
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      //TODO: use location items in userSelected list to map a route on Google map
+                      log(userSelected.toString());
+
+                      Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MapPage(), settings: RouteSettings(arguments: userSelected))
+                      );
+                    },
+                    child: Text("MAP IT!", style: TextStyle(fontSize: 18.0)),
+                  )
+                ]
+            )
+        )
+    );
+  }
+}
+          //length: 2,
+          //child: Scaffold(
+/*            appBar: PreferredSize(
               preferredSize: Size.fromHeight(50.0),
               child: AppBar(
                 backgroundColor: Colors.white,
@@ -71,8 +109,8 @@ class _MatchPageState extends State<MatchPage> {
                     Tab(icon: Icon(Icons.favorite, size: _iconSize)),
                   ],
                 )
-              )
-            ),
+              )*/
+           /* ),
               body: Padding(
               padding: EdgeInsets.all(5.0),
               child: TabBarView(
@@ -85,7 +123,7 @@ class _MatchPageState extends State<MatchPage> {
 
           ));
     }
-  }
+  }*/
 
 
 
