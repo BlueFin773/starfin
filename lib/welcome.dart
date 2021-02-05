@@ -15,7 +15,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Column(
           children:[
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             Text("Welcome to StarFin!",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36, ),
@@ -33,7 +33,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             Image.asset('assets/images/map2.png'),
             SizedBox(
-              height: 80,
+              height: 40,
             ),
             RaisedButton(
               onPressed: () {

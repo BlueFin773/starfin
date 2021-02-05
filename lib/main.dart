@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'welcome.dart';
 import 'rate.dart';
+import 'map.dart';
 import 'match.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -37,7 +38,7 @@ class Starfin extends StatelessWidget {
         ),
         fontFamily: 'Overpass_Mono',
       ),
-      home: MatchPage(),
+      home: MapPage(),
       //TODO: navigation
     );
   }
