@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:starfin/model/location.dart';
 import 'package:starfin/utils/store.dart';
+import 'dart:developer';
 
 class MapPage extends StatefulWidget {
   @override
@@ -53,9 +54,29 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
+  //method to retrieve the address based on coordinates
+
+/*  _getAddress() async {
+    try {
+      List<Placemark> p = await _geolocator.placemarkFromCoordinates(
+        _currentPosition.latitude, _currentPosition.longitude
+      );
+
+      Placemark place = p[0];
+
+      setState(() {
+        var _currentAddress = "${place.name}, ${place.locality}, ${place.postalCode}, ${place.country}";
+      });
+    }
+  }*/
+
+
 
   Widget build(BuildContext context) {
     final List userSelected = ModalRoute.of(context).settings.arguments;
+    List<Location> locations = getLocations();
+    List<Location> selectedLocations = locations.where((location) => userSelected.contains(location.id)).toList();
+    log(selectedLocations.toString());
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
@@ -68,15 +89,7 @@ class _MapPageState extends State<MapPage> {
           mapController = controller;
         },
       ),
-      /*floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToTheLake,
-        label: Text('To the lake!'),
-        icon: Icon(Icons.directions_boat),
-      ),*/
     );
   }
-  /*Future<void> _goToTheLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  }*/
+
 }

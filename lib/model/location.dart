@@ -16,4 +16,9 @@ class Location {
     this.selected
   });
 
+  @override
+  String toString() {
+    return '{ ${this.id}, ${this.address} }';
+  }
+
 }

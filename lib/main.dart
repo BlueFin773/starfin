@@ -38,7 +38,7 @@ class Starfin extends StatelessWidget {
         ),
         fontFamily: 'Overpass_Mono',
       ),
-      home: MapPage(),
+      home: MatchPage(),
       //TODO: navigation
     );
   }
