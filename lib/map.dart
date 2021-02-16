@@ -54,21 +54,6 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-  //method to retrieve the address based on coordinates
-
-/*  _getAddress() async {
-    try {
-      List<Placemark> p = await _geolocator.placemarkFromCoordinates(
-        _currentPosition.latitude, _currentPosition.longitude
-      );
-
-      Placemark place = p[0];
-
-      setState(() {
-        var _currentAddress = "${place.name}, ${place.locality}, ${place.postalCode}, ${place.country}";
-      });
-    }
-  }*/
 
 
 
