@@ -4,6 +4,8 @@ class Location {
   final String name;
   final String description;
   final String address;
+  final double lat;
+  final double lng;
   final String imageURL;
    bool selected;
 
@@ -12,6 +14,8 @@ class Location {
     this.name,
     this.description,
     this.address,
+     this.lat,
+     this.lng,
     this.imageURL,
     this.selected
   });

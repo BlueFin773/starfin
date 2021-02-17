@@ -21,12 +21,40 @@ class _MapPageState extends State<MapPage> {
     _getCurrentLocation();
   }
   GoogleMapController mapController;
+
   //initial camera position on load
-  CameraPosition _initialLocation = CameraPosition(target: LatLng(43.741219, -79.412415));
+  CameraPosition _initialLocation = CameraPosition(target: LatLng(43.64294036123222, -79.38707728379016),  zoom: 10.0);
 
   //initialize geolocator and define current position
   final Geolocator _geolocator = Geolocator();
   Position _currentPosition;
+
+  //
+  final Map<String,Marker> _markers = {};
+
+  //gets the selected locations and defines markers for those locations based on latitude and longitude
+  Future<void> _onMapCreated(GoogleMapController controller) {
+    final List userSelected =  ModalRoute.of(context).settings.arguments;
+    List<Location> locations =  getLocations();
+    List<Location> selectedLocations = locations.where((location) => userSelected.contains(location.id)).toList();
+    log(selectedLocations.toString());
+    mapController = controller;
+
+    setState(() {
+      _markers.clear();
+      for (final location in selectedLocations){
+        final marker = Marker(
+          markerId: MarkerId(location.id),
+          position: LatLng(location.lat, location.lng),
+          infoWindow: InfoWindow(
+            title:location.name
+          )
+        );
+        _markers[location.name] = marker;
+      }
+    });
+
+  }
 
   //method to retrieve current location
   _getCurrentLocation() async {
@@ -44,7 +72,7 @@ class _MapPageState extends State<MapPage> {
               CameraUpdate.newCameraPosition(
                 CameraPosition(
                     target: LatLng(position.latitude, position.longitude),
-                    zoom: 18.0,
+                    zoom: 13.0,
                 ),
               ),
             );
@@ -54,14 +82,8 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
-
-
-
   Widget build(BuildContext context) {
-    final List userSelected = ModalRoute.of(context).settings.arguments;
-    List<Location> locations = getLocations();
-    List<Location> selectedLocations = locations.where((location) => userSelected.contains(location.id)).toList();
-    log(selectedLocations.toString());
+
     return Scaffold(
       body: GoogleMap(
         mapType: MapType.normal,
@@ -70,11 +92,10 @@ class _MapPageState extends State<MapPage> {
         myLocationButtonEnabled: true,
         zoomGesturesEnabled: true,
         zoomControlsEnabled: true,
-        onMapCreated: (GoogleMapController controller) {
-          mapController = controller;
-        },
+        onMapCreated: _onMapCreated,
+        markers: _markers.values.toSet(),
+
       ),
     );
   }
-
 }
