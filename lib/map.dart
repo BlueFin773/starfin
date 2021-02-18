@@ -9,6 +9,7 @@ import 'package:starfin/model/location.dart';
 import 'package:starfin/utils/store.dart';
 import 'dart:developer';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:starfin/fetchMapData.dart';
 
 
 class MapPage extends StatefulWidget {
@@ -20,12 +21,12 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
-    _getCurrentLocation();
+
   }
   GoogleMapController mapController;
-  String googleAPI = "AIzaSyCunipxVC-TLKSc12VPCpIGXATiO2GMm5I";
+
   //test polyline
-  String polyline = "h`vmE{`|y[xgLxfAbi@ptWfiCjje@ruU|cS~i^~|Tt~Yv_Y|vLph]rnUjwUxgWvgi@nyIbua@saAncLd`GzsMrmEvol@at@lx_A|fEhdW}uDtk\\ydEzvYvkFphVzbD`k}@hqKftSbhYlbPrdNbmK``E|pQxbMvi\\|wL~nNprE|tLruG}jA~zMbiHbgKfcItt_@v~\\ftEntQ|cPziKn_WvvU~v@fiWpwVfuGxpJfvXerCjkS|lHv}NxeI`p`@joOl~Kf}Q|mEnlGtrRrhNpdYxmc@vvyAraSlkSnqHx_\\vdJ~t]dmT|o\\zap@tcKhnj@jkOfkLtwC|mLajCt_P{z@nnBtdP~kDcmFxjMgaCtdB`pTgyL~sSouKfp`@{cDnuXeqIzmUioIdobAind@nuxC{dNzgl@ahMjxKm~f@br`@stf@t}hAsxSx|^{id@vcLseQ`gXerKvbj@ztG|ogAyvO`wtBqgYpgv@gsZrfg@m}Vjaf@y~r@tpr@{v`@tiXca[~va@}tVdsUcyIxkT|HhmPgvEjqd@e{JxvSckLpeh@_nJ|ySm{LhiC_kXy{@k~b@jjW}xcAv_x@si_@wmIoiMrcGwmNqk@g}g@s`Hkc^~qFoc_@bf@yvYzsPoy]dbJuaKlbHesa@baCoo`@lnGsk[zc]zeM`|Y~~Kvge@neEvd]r{Jlm[vuUhiSdpo@xu}@fqFbqs@bdSbsUg`Ebs}@aiGpzt@khB|sYwlJ`|Q_vWlph@mgXt_`@utTj~v@eya@rl_@}hXb|XrLlgZ}jJvjKk`Zf{c@qvNv`w@kbCfaa@gk\\`bn@cxDlkoAszPrr|@e~@xlcA_~DprWw|TvlTabYpe^ioW~h|@{eKx~`A|dSroxAb_Plbu@tuBnou@buCtn_BliIpyfBdlCdhdAxt[nwtBfwLx|tBztBh|`DfxJ~xn@zhEd`aAbxLfzmAb~Pjte@dwThlm@nxDdfm@zoHfvlAlyDbmo@`qGbbhAtpFdufAgp]riy@izo@higBeiGtja@p|Ihz\\rhAptmBzoJh|v@nyFrjFq`EloE{oAnhFsySv`Ee{^lfEgzXytKozNjzKghWjvEstKxkGumx@vfXutZrqXgqM~z_@hgNrly@pcXbrr@|eJpjdAfwFl`c@jxAtzaBszCjam@dbLt_k@`qKllp@ca@hr_@~|SztiAvfXbujAv}Dp}yAlv@xwg@y~EloZbsEppKuw@bz^}gAhmXrrQrff@toQt}\\vdLbxHt`BtdPmBrvc@hpGbk]jf@|k@";
+  String polyline = "_hiaGpn}~N`@_E_IsAmC|B{G~AEud@bYqn@`hAk_CrLgUzReGfs@u@be@ShFpFsFMnQehBh@{nBa]}bAwq@wbBjPu{BaFo}@ie@s[et@yP_b@m]cSwbBcDqrBjFez@eQooEuJwnDy~AmiEytAolAym@s_Dgl@ccC_r@sq@_Nil@iIimGkb@_u@eKsf@~TcyAtIyhBvVqlAj@cuA}DgnG}FeeGqHudL~HuvA|b@sw@uBmpBuAojBmXwpBgLwnBlGa~@tQ_UpZuA`[mCbW}Ypk@euBrg@u|AtWcv@k^wgBchAkfCacAsxCeUeZwWu{@ie@wlB}HyiA_]cn@}T_nAwo@{vCk}AivBgfC}fAo]~Aa[tc@}UnBuz@q^qg@eOgu@tDksBbCuoAlBsn@m[w{A{nA{IgpA_Ni\\a_Ast@iEa~@wQa]anAoGw~FiPkmAgI{vBogA_dC{oAov@eb@m`@}q@waA}gBswBw~CqlBulDkcAoqButAagBotF{kH_yCyyE{rGojKyuCyqE_aBqgC}b@yVcqGxLq_@oc@sYex@gT}N}m@D_TqAuSc]cVgs@oTmDwi@gVeMav@kP}vAk[wr@qD}jB~Had@v\\sg@fWqj@pHwsFyUwiBQixCUg{CcTik@`GgjQzHktPo@wmVrI_fEeMuuGmAuii@E{`LEolC~@yiApMwc@``@s]sCtFaWo]g`Be`CPafBnMecLpNalMtBw~B{Z}cB{eAqtF_eAwlFo@uOt_@aPhe@}}@xi@yy@jqAwl@xYsLg@iNfRsHdf@qR`@a[uFio@~JqrAxO{mCfi@iTdoByZrgAwU`\\cW|Jo@kIqGqZyiEaYszEgq@yuBixAscPaaAkhL_WqfBss@sdAcdEs|GwfFkdIq{GelKe`AifCgOemAwRibB{BmtAkiA_lOiYgjEp]ygDqB{iB{YiqD}z@erImSyr@ku@yaGgk@grF{TsdDcK_iBtJsjAz^ykHuR{nGcMyoDmz@odFeh@e_Dwj@i`BSspBwFyjAi~@aqEmTwiAHwp@pS_}AoL{hCkg@w{@{`CqmBmb@oCuU{ZiXmvBmSet@qZ{t@{Twv@yOi`@oq@sEgh@|@mTkD_[fO}QpNgTiEcj@{rAg_AigBuoCw~Ck\\yh@}Mqi@sYq_@_z@}iB_iGibHcpEccFmoEefFkgAecA_aC_@wu@iFiuBm_C}lD}`Eke@_y@cw@_i@ozC{gD{|CsvDiu@e~G}Uy_Byd@_iAm_@a`AcHky@pg@arCia@upDuAyz@_NiK}Dy]";
 
   //initial camera position on load
   CameraPosition _initialLocation = CameraPosition(target: LatLng(43.64294036123222, -79.38707728379016),  zoom: 10.0);
@@ -38,18 +39,25 @@ class _MapPageState extends State<MapPage> {
   final Set<Polyline> _polylines = {};
   PolylinePoints polylinePoints = PolylinePoints();
 
+  //fetch google api data
+
+
   //gets the selected locations and defines markers for those locations based on latitude and longitude
-  Future<void> _onMapCreated(GoogleMapController controller) {
+  Future<void> _onMapCreated(GoogleMapController controller) async {
     final List userSelected =  ModalRoute.of(context).settings.arguments;
     List<Location> locations =  getLocations();
     List<Location> selectedLocations = locations.where((location) => userSelected.contains(location.id)).toList();
     log(selectedLocations.toString());
     mapController = controller;
+    await _getCurrentLocation();
+    fetchMap(_currentPosition, selectedLocations);
 
     //decodes the google API "points"
     List<PointLatLng> result = polylinePoints.decodePolyline(polyline);
 
     final List<LatLng> polylineCoordinates = [];
+
+
 
     setState(() {
       //define the markers
@@ -87,7 +95,7 @@ class _MapPageState extends State<MapPage> {
             //store the position
             _currentPosition = position;
 
-            print('Current Position: $_currentPosition');
+            //print('Current Position: $_currentPosition');
 
             //move camera to current position
             mapController.animateCamera(
