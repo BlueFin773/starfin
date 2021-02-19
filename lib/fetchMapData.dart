@@ -36,7 +36,7 @@ formatCoordinate(LatLng point) {
    return formatedCoordinate;
 }
 
-Future<http.Response> fetchMap(Position currentPosition, List<Location> locations) async{
+Future<Map<String,dynamic>> fetchMap(Position currentPosition, List<Location> locations) async{
   coordinates.clear();
   print(currentPosition);
   for(final location in locations){
@@ -59,8 +59,15 @@ Future<http.Response> fetchMap(Position currentPosition, List<Location> location
   print(requestUrl);
   final response = await http.get(requestUrl);
    if(response.statusCode == 200) {
-     final data = json.decode(response.toString());
-     print(data);
+     Map<String,dynamic> map = json.decode(response.body);
+     //print(map);
+     // List<MapData> posts = body
+     //     .map(
+     //       (dynamic item) => MapData.fromJson(item),
+     // )
+     //     .toList();
+
+     return map;
    }else{
      throw Exception('Failed to load album');
    }

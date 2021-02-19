@@ -22,12 +22,12 @@ class _MapPageState extends State<MapPage> {
   @override
   void initState() {
     super.initState();
+
   }
   GoogleMapController mapController;
 
 
   //test polyline
-  String polyline = "yxjiG|bpcNLb@^t@f@t@`@n@DJhA`Bh@q@`@_@`@SrAa@p@WJCG_@Gm@@q@IaBS}Aq@oFw@aDY}@u@sB_A_CWe@eB}D}AmDi@sA?MCWIWm@mBe@aB{@_CeEiK}@wCg@{Bg@oCYsB]gDU{BY_CMkAQqAB_@UcB{AoLw@yF[sB[wA]gBe@gDg@_D]yAcAsDi@iCYeAgAqE}@wDY}AWkCGyBB{@r@oAp@_ATc@Ne@No@@s@Au@Ck@m@i@m@CeBMg@?]Ba@P`@Q\\Cf@?dBLl@BHXHf@@LBl@GdAGXg@bAkAbBm@jBKp@?h@Bb@`@tBJd@JNFXvApGf@rBxAfGzAbId@`DnBbNbBvL|Db[fAfIVhAz@jCXx@[J_Bj@iDdAqAd@KFIJSH}Ab@QDHTNT\\f@NVh@~A`@|BZrB|Ag@pFeBhBm@ZMbAe@|Bs@zAg@h@UfDoBpA|FpApF|@lDXjAZdDPvBQwB[eDYkA}@mDqAqFqA}FgDnBi@T{Af@sA`@i@Pc@NS@]FyBp@qEvAoBj@]XwFpBiBj@{LxDyH`CSLMPYnAITOP}@ZaFvAeD~@uBj@";
 
   //initial camera position on load
   CameraPosition _initialLocation = CameraPosition(target: LatLng(43.64294036123222, -79.38707728379016),  zoom: 10.0);
@@ -39,6 +39,9 @@ class _MapPageState extends State<MapPage> {
   final Map<String,Marker> _markers = {};
   final Set<Polyline> _polylines = {};
   PolylinePoints polylinePoints = PolylinePoints();
+  Map<String,dynamic> mapdata;
+  String polyline = "";
+  List<dynamic> overviewPolyline;
 
   //fetch google api data
 
@@ -51,8 +54,16 @@ class _MapPageState extends State<MapPage> {
     log(selectedLocations.toString());
     mapController = controller;
     await _getCurrentLocation();
-    var data = fetchMap(_currentPosition, selectedLocations);
-    print(data);
+    await fetchMap(_currentPosition, selectedLocations).then((data){
+      setState(() {
+        mapdata = data;
+        overviewPolyline = mapdata["routes"];
+        polyline = (overviewPolyline[0]["overview_polyline"]["points"]);
+      });
+
+      print(polyline);
+    });
+
 
 
 
@@ -116,6 +127,7 @@ class _MapPageState extends State<MapPage> {
       print(e);
     });
   }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
