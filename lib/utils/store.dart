@@ -7,7 +7,7 @@ List<Location> getLocations() {
       name: 'name0',
       description: 'description0',
       address: 'address0',
-      lat: 43.659554,
+      lat: 43.649554,
       lng: -79.354302,
       imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
       selected: false,
