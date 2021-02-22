@@ -51,7 +51,8 @@ Future<Map<String,dynamic>> fetchMap(Position currentPosition, List<Location> lo
   Map<String,String> queryParams = {
     'origin': currentPosition.latitude.toString() + ',' + currentPosition.longitude.toString(),
     'destination': _destinationCoord,
-    'waypoints': /*'optimize:true'*/  _formattedCoords, //+ 'Eaton Center' + ',' + 'University of Toronto Saint George',
+    //TODO: routing misses one waypoint when optimize true is used, fix this.
+    'waypoints': /*'optimize:true' +*/ _formattedCoords,
     'key': googleAPI
   };
   String queryString = Uri(queryParameters: queryParams).query;

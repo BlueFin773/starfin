@@ -131,17 +131,46 @@ class _MapPageState extends State<MapPage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: _initialLocation,
-        myLocationEnabled: true,
-        myLocationButtonEnabled: true,
-        zoomGesturesEnabled: true,
-        zoomControlsEnabled: true,
-        onMapCreated: _onMapCreated,
-        markers: _markers.values.toSet(),
-        polylines: _polylines,
-      ),
+        body:Container(
+        padding: const EdgeInsets.all(32),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+          Text("Your Map!",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36,),
+          textAlign: TextAlign.center
+          ),
+        new Expanded(
+          child: GoogleMap(
+            mapType: MapType.normal,
+            initialCameraPosition: _initialLocation,
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            zoomGesturesEnabled: true,
+            zoomControlsEnabled: true,
+            onMapCreated: _onMapCreated,
+            markers: _markers.values.toSet(),
+            polylines: _polylines,
+           ),
+        ),
+            SizedBox(
+              height: 20,
+            ),
+            RaisedButton(
+              onPressed: () {
+                //TODO: use location items in userSelected list to map a route on Google map
+                //log(userSelected.toString());
+
+                // Navigator.push(
+                //     context,
+                //     MaterialPageRoute(builder: (context) => MapPage(), settings: RouteSettings(arguments: userSelected))
+                // );
+              },
+              child: Text("Finish!", style: TextStyle(fontSize: 18.0)),
+            )
+      ]
+        ),
+    ),
     );
   }
 }
