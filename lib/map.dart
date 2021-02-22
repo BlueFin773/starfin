@@ -10,6 +10,7 @@ import 'package:starfin/utils/store.dart';
 import 'dart:developer';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:starfin/fetchMapData.dart';
+import 'package:starfin/rate.dart';
 import 'dart:convert';
 
 
@@ -145,9 +146,10 @@ class _MapPageState extends State<MapPage> {
             mapType: MapType.normal,
             initialCameraPosition: _initialLocation,
             myLocationEnabled: true,
-            myLocationButtonEnabled: true,
+            myLocationButtonEnabled: false,
             zoomGesturesEnabled: true,
             zoomControlsEnabled: true,
+            mapToolbarEnabled: false,
             onMapCreated: _onMapCreated,
             markers: _markers.values.toSet(),
             polylines: _polylines,
@@ -158,13 +160,11 @@ class _MapPageState extends State<MapPage> {
             ),
             RaisedButton(
               onPressed: () {
-                //TODO: use location items in userSelected list to map a route on Google map
-                //log(userSelected.toString());
-
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(builder: (context) => MapPage(), settings: RouteSettings(arguments: userSelected))
-                // );
+                //TODO: Navigate to rate screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => RatePage()),
+                );
               },
               child: Text("Finish!", style: TextStyle(fontSize: 18.0)),
             )

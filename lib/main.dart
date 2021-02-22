@@ -19,27 +19,21 @@ void main() async {
 class Starfin extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.white,
         scaffoldBackgroundColor: Colors.white,
         accentColor: Color(0xFF6C63FF),
         textTheme: TextTheme(bodyText2:TextStyle(color: Color(0xFF59606D,))),
-
-
         buttonTheme: ButtonThemeData(
           minWidth: 200.0,
           height: 75.0,
           buttonColor: Color(0xFF6C63FF),
           textTheme: ButtonTextTheme.primary,
-
         ),
         fontFamily: 'Overpass_Mono',
       ),
-      home: MatchPage(),
-      //TODO: navigation
+      home: WelcomePage(),
     );
   }
 }

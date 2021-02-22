@@ -6,6 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:starfin/model/location.dart';
 import 'package:starfin/utils/store.dart';
 import 'package:starfin/map.dart';
+import 'package:starfin/rate.dart';
 
 class MatchPage extends StatefulWidget {
   @override
@@ -28,6 +29,9 @@ class _MatchPageState extends State<MatchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final RatePageState args = ModalRoute.of(context).settings.arguments;
+    var ratings = [args.culture, args.nature, args.entertainment, args.historical, args.architecture];
+    print(ratings);
     Column _buildLocations(List<Location> locationsList) {
       return Column(
           children: <Widget>[

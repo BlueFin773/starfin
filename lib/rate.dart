@@ -1,43 +1,43 @@
 import 'package:flutter/material.dart';
 import 'match.dart';
 
-
 class RatePage extends StatefulWidget {
   @override
-  _RatePageState createState() => _RatePageState();
+  RatePageState createState() => RatePageState(5,5,5,5,5);
 }
 
-class _RatePageState extends State<RatePage> {
-  int _culture = 6;
-  int _nature = 4;
-  int _entertainment = 7;
-  int _historical = 3;
-  int _architecture = 1;
+class RatePageState extends State<RatePage> {
+  int culture;
+  int nature;
+  int entertainment;
+  int historical;
+  int architecture;
+
+  //needed to pass on state to next page
+  RatePageState(this.culture,this.nature,this.entertainment,this.historical,this.architecture);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         padding: const EdgeInsets.all(32),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 20,
-            ),
             Text("Rate It!",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 36,),
                 textAlign: TextAlign.center
             ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             Text(
                 "Use the sliders to rate your preference towards different types of attractions.",
                 style: TextStyle(fontSize: 18),
                 textAlign: TextAlign.center
             ),
-
             SizedBox(
-              height: 40,
+              height: 20,
             ),
 
             // culture slider
@@ -48,7 +48,7 @@ class _RatePageState extends State<RatePage> {
             ),
               new Expanded(
               child: Slider(
-                value: _culture.toDouble(),
+                value: culture.toDouble(),
                 min:1.0,
                 max:10.0,
                 divisions:9,
@@ -56,7 +56,7 @@ class _RatePageState extends State<RatePage> {
                 inactiveColor: Color(0xFF707070),
                 onChanged:(double newValue){
                   setState((){
-                    _culture = newValue.round();
+                    culture = newValue.round();
                   });
                 },
               ),
@@ -70,7 +70,7 @@ class _RatePageState extends State<RatePage> {
             ),
             new Expanded(
               child: Slider(
-                value: _nature.toDouble(),
+                value: nature.toDouble(),
                 min:1.0,
                 max:10.0,
                 divisions:9,
@@ -78,7 +78,7 @@ class _RatePageState extends State<RatePage> {
                 inactiveColor: Color(0xFF707070),
                 onChanged:(double newValue){
                   setState((){
-                    _nature = newValue.round();
+                    nature = newValue.round();
                   });
                 },
               ),
@@ -92,7 +92,7 @@ class _RatePageState extends State<RatePage> {
             ),
             new Expanded(
               child: Slider(
-                value: _entertainment.toDouble(),
+                value: entertainment.toDouble(),
                 min:1.0,
                 max:10.0,
                 divisions:9,
@@ -100,7 +100,7 @@ class _RatePageState extends State<RatePage> {
                 inactiveColor: Color(0xFF707070),
                 onChanged:(double newValue){
                   setState((){
-                    _entertainment = newValue.round();
+                    entertainment = newValue.round();
                   });
                 },
               ),
@@ -114,7 +114,7 @@ class _RatePageState extends State<RatePage> {
             ),
             new Expanded(
               child: Slider(
-                value: _historical.toDouble(),
+                value: historical.toDouble(),
                 min:1.0,
                 max:10.0,
                 divisions:9,
@@ -122,7 +122,7 @@ class _RatePageState extends State<RatePage> {
                 inactiveColor: Color(0xFF707070),
                 onChanged:(double newValue){
                   setState((){
-                    _historical = newValue.round();
+                    historical = newValue.round();
                   });
                 },
               ),
@@ -136,7 +136,7 @@ class _RatePageState extends State<RatePage> {
             ),
             new Expanded(
               child: Slider(
-                value: _architecture.toDouble(),
+                value: architecture.toDouble(),
                 min:1.0,
                 max:10.0,
                 divisions:9,
@@ -144,7 +144,7 @@ class _RatePageState extends State<RatePage> {
                 inactiveColor: Color(0xFF707070),
                 onChanged:(double newValue){
                   setState((){
-                    _architecture = newValue.round();
+                    architecture = newValue.round();
                   });
                 },
               ),
@@ -153,12 +153,12 @@ class _RatePageState extends State<RatePage> {
               height: 40,
             ),
 
-
             RaisedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MatchPage()),
+                  //navigate to the Match page and pass on the state of the sliders
+                  MaterialPageRoute(builder: (context) => MatchPage(),settings: RouteSettings(arguments: RatePageState(culture,nature,entertainment,historical,architecture))),
                 );
               },
               child: Text("RATE IT!", style: TextStyle(fontSize: 18.0)),

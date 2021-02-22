@@ -46,13 +46,12 @@ Future<Map<String,dynamic>> fetchMap(Position currentPosition, List<Location> lo
   print(formatCoordinates(coordinates));
   print(formatCoordinate(coordinates[coordinates.length-1]));
   String _formattedCoords = formatCoordinates(coordinates);
-  String _destinationCoord = formatCoordinate(coordinates[coordinates.length-1]);
+  String _destinationCoord = formatCoordinate(coordinates[coordinates.length-1]); //TODO: make destination coordinate the farther away in the list
   //create the correct url
   Map<String,String> queryParams = {
     'origin': currentPosition.latitude.toString() + ',' + currentPosition.longitude.toString(),
     'destination': _destinationCoord,
-    //TODO: routing misses one waypoint when optimize true is used, fix this.
-    'waypoints': /*'optimize:true' +*/ _formattedCoords,
+    'waypoints': 'optimize:true|' + _formattedCoords,
     'key': googleAPI
   };
   String queryString = Uri(queryParameters: queryParams).query;
