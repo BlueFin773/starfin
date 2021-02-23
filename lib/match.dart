@@ -32,6 +32,7 @@ class _MatchPageState extends State<MatchPage> {
     final RatePageState args = ModalRoute.of(context).settings.arguments;
     var ratings = [args.culture, args.nature, args.entertainment, args.historical, args.architecture];
     print(ratings);
+    print(userSelected);
     Column _buildLocations(List<Location> locationsList) {
       return Column(
           children: <Widget>[

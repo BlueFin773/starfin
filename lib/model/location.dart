@@ -7,22 +7,24 @@ class Location {
   final double lat;
   final double lng;
   final String imageURL;
+  final List<int> rating;
    bool selected;
 
    Location({
-    this.id,
-    this.name,
-    this.description,
-    this.address,
+     this.id,
+     this.name,
+     this.description,
+     this.address,
      this.lat,
      this.lng,
-    this.imageURL,
-    this.selected
+     this.imageURL,
+     this.selected,
+     this.rating
   });
 
   @override
   String toString() {
-    return '{ ${this.id}, ${this.address} }';
+    return '{ ${this.id}, ${this.address}, ${this.rating} }';
   }
 
 }
