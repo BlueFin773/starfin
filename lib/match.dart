@@ -31,7 +31,7 @@ class _MatchPageState extends State<MatchPage> {
     });
   }
 
-  //compare two ratings cosine similarity algorithm
+  //compare two ratings by cosine similarity
    _compare(List userRating, List locationRating){
     //check if both vectors are the same size
     if(userRating.length != locationRating.length){
@@ -52,7 +52,13 @@ class _MatchPageState extends State<MatchPage> {
   }
 
   //run compare against all locations and return the top 5 best matches
-  _compareAll()
+  _compareAll(List userRating, List<Location> locations){
+    List<double> results;
+    for(var location in locations){
+      double result = _compare(userRating,location.rating);
+      results.add(result);
+    }
+  }
 
 
   @override
@@ -114,7 +120,7 @@ class _MatchPageState extends State<MatchPage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      log(userSelected.toString());
+                      print(userSelected.toString());
                       Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MapPage(), settings: RouteSettings(arguments: userSelected))
