@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -13,9 +14,13 @@ class MatchPage extends StatefulWidget {
 }
 
 class _MatchPageState extends State<MatchPage> {
-  List<Location> locations = getLocations();
+  List<Location> allLocations = getLocations();
+  List<Location> bestLocationMatches;
   List<String> userSelected = getSelectedIDs();
+  RatePageState args;
+  var ratings;
 
+  //handle user selected list
   void _handleSelectedListChanged(String locationID) {
     setState(() {
       if (userSelected.contains(locationID)) {
@@ -26,16 +31,38 @@ class _MatchPageState extends State<MatchPage> {
     });
   }
 
+  //compare two ratings cosine similarity algorithm
+   _compare(List userRating, List locationRating){
+    //check if both vectors are the same size
+    if(userRating.length != locationRating.length){
+      print("Error: Comparison vectors are not the same length");
+      return;
+    }else{
+      double product = 0.0;
+      double normUserRating = 0.0;
+      double normLocationRating = 0.0;
+
+      for(int i = 0; i < userRating.length; i++){
+        product += userRating[i] * locationRating[i];
+        normUserRating += pow(userRating[i],2);
+        normLocationRating += pow(locationRating[i], 2);
+      }
+      return product / (sqrt(normUserRating) * sqrt(normLocationRating));
+    }
+  }
+
+  //run compare against all locations and return the top 5 best matches
+  _compareAll()
+
+
   @override
   Widget build(BuildContext context) {
 
     //getting data from rate page and saving as an array which can be used to compare to database listings
-    final RatePageState args = ModalRoute.of(context).settings.arguments;
-    var ratings = [args.culture, args.nature, args.entertainment, args.historical, args.architecture];
+    args = ModalRoute.of(context).settings.arguments;
+    ratings = [args.culture, args.nature, args.entertainment, args.historical, args.architecture];
     print(ratings);
     print(userSelected);
-    //TODO: create a method to compare user ratings with database listing using cosine similarity
-
 
     //TODO: Query the database to show the best 10 matches to the user using the comparison method
     Column _buildLocations(List<Location> locationsList) {
@@ -48,15 +75,15 @@ class _MatchPageState extends State<MatchPage> {
                       return ListTile(
                           title: Text(locationsList[index].name),
                           leading: Image.network(locationsList[index].imageURL),
-                          subtitle: Text(locations[index].description),
+                          subtitle: Text(allLocations[index].description),
                           enabled: true,
-                          selected: locations[index].selected,
+                          selected: allLocations[index].selected,
                           selectedTileColor: Color(0xFF6C63FF),
                           onTap: () {
                             setState(() {
-                              locations[index].selected =
-                              !locations[index].selected;
-                              _handleSelectedListChanged(locations[index].id);
+                              allLocations[index].selected =
+                              !allLocations[index].selected;
+                              _handleSelectedListChanged(allLocations[index].id);
                             });
                           }
                       );
@@ -79,7 +106,7 @@ class _MatchPageState extends State<MatchPage> {
                       textAlign: TextAlign.center
                   ),
                   new Expanded(
-                        child: _buildLocations(locations.toList()),
+                        child: _buildLocations(allLocations.toList()),
                       ),
 
                   SizedBox(
