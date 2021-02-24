@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,10 +28,16 @@ class _MatchPageState extends State<MatchPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    //getting data from rate page and saving as an array which can be used to compare to database listings
     final RatePageState args = ModalRoute.of(context).settings.arguments;
     var ratings = [args.culture, args.nature, args.entertainment, args.historical, args.architecture];
     print(ratings);
     print(userSelected);
+    //TODO: create a method to compare user ratings with database listing using cosine similarity
+
+
+    //TODO: Query the database to show the best 10 matches to the user using the comparison method
     Column _buildLocations(List<Location> locationsList) {
       return Column(
           children: <Widget>[
@@ -54,7 +59,6 @@ class _MatchPageState extends State<MatchPage> {
                               _handleSelectedListChanged(locations[index].id);
                             });
                           }
-
                       );
                     }
                 )
@@ -62,7 +66,6 @@ class _MatchPageState extends State<MatchPage> {
           ]
       );
     }
-
 
     //const double _iconSize = 20.0;
     return Scaffold(
@@ -84,9 +87,7 @@ class _MatchPageState extends State<MatchPage> {
                   ),
                   RaisedButton(
                     onPressed: () {
-                      //TODO: use location items in userSelected list to map a route on Google map
                       log(userSelected.toString());
-
                       Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => MapPage(), settings: RouteSettings(arguments: userSelected))
