@@ -16,7 +16,7 @@ class MatchPage extends StatefulWidget {
 
 class _MatchPageState extends State<MatchPage> {
   List<Location> allLocations = getLocations();
-  List bestLocationMatches;
+  List<dynamic> bestLocationMatches;
   List<String> userSelected = getSelectedIDs();
   RatePageState args;
   var ratings;
@@ -53,20 +53,18 @@ class _MatchPageState extends State<MatchPage> {
 
   //run compare against all locations and return the top 5 best matches
   _compareAll(List userRating, List<Location> locations){
-
     var map = new Map();
     for(var location in locations){
        map[location] = _compare(userRating,location.rating);
     }
     print("Map" + map.toString());
-    final sorted = SplayTreeMap.from(
-        map, (key1, key2) => map[key2].compareTo(map[key1]));
-    print("sorted:" + sorted.toString());
-    bestLocationMatches = sorted.keys.toList();
-    print("best list:" + bestLocationMatches.toString());
-    //return sorted;
+    var sortedKeys = map.keys.toList(growable:false)
+      ..sort((k1, k2) => map[k2].compareTo(map[k1]));
+    LinkedHashMap sortedMap = new LinkedHashMap
+        .fromIterable(sortedKeys, key: (k) => k, value: (k) => map[k]);
+    print("sorted:" + sortedMap.toString());
+    bestLocationMatches = sortedMap.keys.toList();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -78,26 +76,25 @@ class _MatchPageState extends State<MatchPage> {
     print("Ratings" + ratings.toString());
     print("User selected" + userSelected.toString());
 
-
-    Column _buildLocations(List<Location> locationsList) {
+    Column _buildLocations(List<dynamic> locationsList) {
       return Column(
           children: <Widget>[
             Expanded(
                 child: ListView.builder(
-                    itemCount: locationsList.length,
+                    itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
                           title: Text(locationsList[index].name),
                           leading: Image.network(locationsList[index].imageURL),
-                          subtitle: Text(allLocations[index].description),
+                          subtitle: Text(locationsList[index].description),
                           enabled: true,
-                          selected: allLocations[index].selected,
+                          selected: locationsList[index].selected,
                           selectedTileColor: Color(0xFF6C63FF),
                           onTap: () {
                             setState(() {
-                              allLocations[index].selected =
-                              !allLocations[index].selected;
-                              _handleSelectedListChanged(allLocations[index].id);
+                              locationsList[index].selected =
+                              !locationsList[index].selected;
+                              _handleSelectedListChanged(locationsList[index].id);
                             });
                           }
                       );
@@ -120,7 +117,7 @@ class _MatchPageState extends State<MatchPage> {
                       textAlign: TextAlign.center
                   ),
                   new Expanded(
-                        child: _buildLocations(allLocations.toList()),
+                        child: _buildLocations(bestLocationMatches.toList()),
                       ),
 
                   SizedBox(
