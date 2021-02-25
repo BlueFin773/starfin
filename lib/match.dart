@@ -32,32 +32,34 @@ class _MatchPageState extends State<MatchPage> {
   }
 
   //compare two ratings by cosine similarity
-   _compare(List userRating, List locationRating){
+   _compare(List<int> userRating, List<int> locationRating){
+     double product = 0.0;
+     double normUserRating = 0.0;
+     double normLocationRating = 0.0;
     //check if both vectors are the same size
     if(userRating.length != locationRating.length){
       print("Error: Comparison vectors are not the same length");
       return;
     }else{
-      double product = 0.0;
-      double normUserRating = 0.0;
-      double normLocationRating = 0.0;
-
       for(int i = 0; i < userRating.length; i++){
         product += userRating[i] * locationRating[i];
         normUserRating += pow(userRating[i],2);
         normLocationRating += pow(locationRating[i], 2);
       }
-      return product / (sqrt(normUserRating) * sqrt(normLocationRating));
     }
+     return product / (sqrt(normUserRating) * sqrt(normLocationRating));
   }
 
   //run compare against all locations and return the top 5 best matches
   _compareAll(List userRating, List<Location> locations){
-    List<double> results;
+    var map = new Map();
     for(var location in locations){
-      double result = _compare(userRating,location.rating);
-      results.add(result);
+       map[location] = _compare(userRating,location.rating);
     }
+    print("Map" + map.toString());
+    var sorted = map.keys.toList()..sort();
+    print("sorted" + sorted.toString());
+    return map;
   }
 
 
@@ -67,8 +69,9 @@ class _MatchPageState extends State<MatchPage> {
     //getting data from rate page and saving as an array which can be used to compare to database listings
     args = ModalRoute.of(context).settings.arguments;
     ratings = [args.culture, args.nature, args.entertainment, args.historical, args.architecture];
-    print(ratings);
-    print(userSelected);
+    _compareAll(ratings, allLocations);
+    print("Ratings" + ratings.toString());
+    print("User selected" + userSelected.toString());
 
     //TODO: Query the database to show the best 10 matches to the user using the comparison method
     Column _buildLocations(List<Location> locationsList) {
