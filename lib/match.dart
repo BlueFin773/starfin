@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:collection';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,7 +16,7 @@ class MatchPage extends StatefulWidget {
 
 class _MatchPageState extends State<MatchPage> {
   List<Location> allLocations = getLocations();
-  List<Location> bestLocationMatches;
+  List bestLocationMatches;
   List<String> userSelected = getSelectedIDs();
   RatePageState args;
   var ratings;
@@ -52,14 +53,18 @@ class _MatchPageState extends State<MatchPage> {
 
   //run compare against all locations and return the top 5 best matches
   _compareAll(List userRating, List<Location> locations){
+
     var map = new Map();
     for(var location in locations){
        map[location] = _compare(userRating,location.rating);
     }
     print("Map" + map.toString());
-    var sorted = map.keys.toList()..sort();
-    print("sorted" + sorted.toString());
-    return map;
+    final sorted = SplayTreeMap.from(
+        map, (key1, key2) => map[key2].compareTo(map[key1]));
+    print("sorted:" + sorted.toString());
+    bestLocationMatches = sorted.keys.toList();
+    print("best list:" + bestLocationMatches.toString());
+    //return sorted;
   }
 
 
@@ -73,7 +78,7 @@ class _MatchPageState extends State<MatchPage> {
     print("Ratings" + ratings.toString());
     print("User selected" + userSelected.toString());
 
-    //TODO: Query the database to show the best 10 matches to the user using the comparison method
+
     Column _buildLocations(List<Location> locationsList) {
       return Column(
           children: <Widget>[
