@@ -13,6 +13,7 @@ class _WelcomePageState extends State<WelcomePage> {
       body: Container(
         padding: const EdgeInsets.all(32),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children:[
             SizedBox(
               height: 10,
@@ -22,14 +23,14 @@ class _WelcomePageState extends State<WelcomePage> {
               textAlign: TextAlign.center
             ),
             SizedBox(
-              height: 40,
+              height: 20,
             ),
             Text("StarFin helps you create a custom day plan to visit tourist attractions in the Toronto area based on your preferences.",
                 style: TextStyle(fontSize:18),
                 textAlign: TextAlign.center
             ),
             SizedBox(
-              height: 60,
+              height: 40,
             ),
             Image.asset('assets/images/map2.png'),
             SizedBox(
