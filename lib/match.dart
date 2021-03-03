@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:starfin/model/location.dart';
 import 'package:starfin/utils/store.dart';
 import 'package:starfin/map.dart';
@@ -82,11 +83,16 @@ class _MatchPageState extends State<MatchPage> {
             Expanded(
                 child: ListView.builder(
                     itemCount: 10,
+                    itemExtent:100,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                          title: Text(locationsList[index].name),
-                          leading: Image.network(locationsList[index].imageURL),
-                          subtitle: Text(locationsList[index].description),
+                          title: Text(locationsList[index].name, style:TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          leading:  SizedBox(
+                            width:100,
+                            height:100,
+                            child:Image.network(locationsList[index].imageURL, fit:BoxFit.cover ),
+                          ),
+                          subtitle: Text(locationsList[index].description, style:TextStyle(fontSize: 12)),
                           enabled: true,
                           selected: locationsList[index].selected,
                           selectedTileColor: Color(0xFF6C63FF),

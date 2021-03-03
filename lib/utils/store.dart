@@ -1,28 +1,28 @@
 import 'package:starfin/model/location.dart';
-
+// rating order: [culture, nature, entertainment, historical, architecture]
 List<Location> getLocations() {
   return [
     Location(
       id: '0',
-      name: 'name0',
-      description: 'description0',
-      address: 'address0',
-      lat: 43.649554,
-      lng: -79.354302,
-      imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
-      rating:[10,1,1,1,1],
+      name: 'Ripley’s Aquarium',
+      description: 'Expansive, modern aquarium with many species & habitats on display, plus events & classes.',
+      address: '288 Bremner Blvd, Toronto, ON M5V 3L9',
+      lat: 43.642497725323416,
+      lng: -79.38596402104402,
+      imageURL: 'https://lh5.googleusercontent.com/p/AF1QipN5bXUCUExzjzI3IdD7EHPkDhJuQsYu2I5rZ0jd=w426-h240-k-no',
+      rating:[2,9,5,2,3],
       selected: false,
 
     ),
     Location(
       id: '1',
-      name: 'name1',
-      description: 'description1',
-      address: 'address1',
-      lat: 43.649506,
-      lng: -79.359906,
-      imageURL: 'https://images.unsplash.com/photo-1517673400267-0251440c45dc?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=f197f4922b3f26ed3f4e3e66a113b67b&auto=format&fit=crop&w=1050&q=80',
-      rating:[1,10,1,1,1],
+      name: 'Toronto Island Park',
+      description: 'Scenic vistas of the Toronto skyline are a main attraction at this lush, grassy recreation area.',
+      address: 'JJFG+24 Toronto, Ontario',
+      lat: 43.62296043164721,
+      lng: -79.37461157375452,
+      imageURL: 'https://lh5.googleusercontent.com/p/AF1QipOgNo1HANwMlk_x34A98vyq9AUIcW1N0ABdvk27=w408-h278-k-no',
+      rating:[4,9,5,2,6],
       selected: false,
 
     ),
@@ -30,7 +30,7 @@ List<Location> getLocations() {
     Location(
       id: '2',
       name: 'name2',
-      description: 'description2',
+      description: 'description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2description2',
       address: 'address2',
       lat: 43.642816,
       lng: -79.367424,
