@@ -11,6 +11,7 @@ import 'dart:developer';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:starfin/fetchMapData.dart';
 import 'package:starfin/rate.dart';
+import 'package:map_launcher/map_launcher.dart' as mapLauncher;
 import 'dart:convert';
 
 
@@ -32,6 +33,7 @@ class _MapPageState extends State<MapPage> {
 
   //initial camera position on load
   CameraPosition _initialLocation = CameraPosition(target: LatLng(43.64294036123222, -79.38707728379016),  zoom: 10.0);
+  List selected;
 
   //initialize geolocator and define current position
   final Geolocator _geolocator = Geolocator();
@@ -58,6 +60,7 @@ class _MapPageState extends State<MapPage> {
     await fetchMap(_currentPosition, selectedLocations).then((data){
       setState(() {
         mapdata = data;
+        selected = selectedLocations;
         overviewPolyline = mapdata["routes"];
         polyline = (overviewPolyline[0]["overview_polyline"]["points"]);
       });
@@ -129,6 +132,29 @@ class _MapPageState extends State<MapPage> {
     });
   }
 
+  _openMap(List selected) async{
+    final availableMaps = await mapLauncher.MapLauncher.installedMaps;
+    print(availableMaps); // [AvailableMap { mapName: Google Maps, mapType: google }, ...]
+    List<mapLauncher.Coords> _allListCoords = new List();
+    mapLauncher.Coords _destCoords;
+    List<mapLauncher.Coords> _waypointCoords = new List();
+    for(var location in selected){
+      mapLauncher.Coords coord = mapLauncher.Coords(location.lat, location.lng);
+      print(coord);
+      _allListCoords.add(coord);
+    };
+    _destCoords=_allListCoords.last;
+    _allListCoords.removeLast();
+    _waypointCoords = _allListCoords;
+
+
+
+    await availableMaps.first.showDirections(
+      destination: _destCoords,
+      waypoints: _waypointCoords,
+      //title: "Ocean Beach",
+    );
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -161,12 +187,9 @@ class _MapPageState extends State<MapPage> {
             RaisedButton(
               onPressed: () {
                 //TODO: Navigate to rate screen
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => RatePage()),
-                );
+                _openMap(selected);
               },
-              child: Text("Finish!", style: TextStyle(fontSize: 18.0)),
+              child: Text("Navigate!", style: TextStyle(fontSize: 18.0)),
             )
       ]
         ),
