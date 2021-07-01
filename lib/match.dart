@@ -52,7 +52,7 @@ class _MatchPageState extends State<MatchPage> {
      return product / (sqrt(normUserRating) * sqrt(normLocationRating));
   }
 
-  //run compare against all locations and return the top 5 best matches
+  //run compare against all locations and return the best matches
   _compareAll(List userRating, List<Location> locations){
     var map = new Map();
     for(var location in locations){
@@ -86,13 +86,13 @@ class _MatchPageState extends State<MatchPage> {
                     itemExtent:100,
                     itemBuilder: (BuildContext context, int index) {
                       return ListTile(
-                          title: Text(locationsList[index].name, style:TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                          title: Text(locationsList[index].name, style:TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
                           leading:  SizedBox(
                             width:100,
                             height:100,
                             child:Image.network(locationsList[index].imageURL, fit:BoxFit.cover ),
                           ),
-                          subtitle: Text(locationsList[index].description, style:TextStyle(fontSize: 12)),
+                          subtitle: Text(locationsList[index].description, style:TextStyle(fontSize: 10)),
                           enabled: true,
                           selected: locationsList[index].selected,
                           selectedTileColor: Color(0xFF6C63FF),

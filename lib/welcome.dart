@@ -32,7 +32,7 @@ class _WelcomePageState extends State<WelcomePage> {
             SizedBox(
               height: 40,
             ),
-            Image.asset('assets/images/map2.png'),
+            Expanded(child:Image.asset('assets/images/map2.png'),),
             SizedBox(
               height: 40,
             ),
