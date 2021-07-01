@@ -10,7 +10,7 @@
         android:label="starfin"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCunipxVC-TLKSc12VPCpIGXATiO2GMm5I"/>
+            android:value="INSERT GOOGLE API KEY HERE"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
